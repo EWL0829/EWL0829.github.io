@@ -1,0 +1,64 @@
+---
+layout:     post                    
+title:      正式开始开发的第一天（2）              
+subtitle:   记录一下我踩的坑
+date:       2017-02-06            
+author:     EWL                  
+header-img: img/post-bg-2015.jpg    
+catalog: true                       
+tags:                               
+    - 前端
+    - JS
+    - CSS
+    - html
+---
+
+记录一下我踩的坑
+1. 全局安装webpack以及本地目录安装webpack依赖
+2. 空格害死人系列
+3. tab键害死人系列
+4. 眼瞎害死人系列
+
+### 具体如何踩上这些坑
+
+首先，问题出在webpack的安装上，webpack是一个模块化工具，它天生支持commonJS 规范，它的编译方式是把commonJS模块转化为function类型模块（浏览器支持），加载方式：各种loader插件，找不到想要的loader还可以自己写一个。
+放一个[官方文档](http://webpack.github.io/docs)。
+* 全局安装（npm install webapck -g）
+* 安装项目依赖（npm install webpack@1.15.0 --save-dev）
+* 查看版本号（webpack -v）
+以上的第二条，就是**第一个坑点**，注意webpack@1.15.0与--save-dev之间有一个空格，以及全局安装时npm会使用相对稳定的版本，而项目依赖中加入版本号，也无伤大雅，甚至将两部分的版本都设置为一样的，也是可以的。
+**第二个坑点**就是老师所讲的，不要使用2以上的webpack版本，因为不兼容IE8。
+**第三个坑点**就是--save-dev，完全不知道是干什么用的。查了一些资料以及听了老师讲的东西之后，大概有一个印象如下：
+--save-dev是npm的另一个机制，它会把包的信息存放在package.json的文件里，这样就能记录项目的依赖了。通过--save-dev安装了npm包之后，包的名称和版本都会被记录在package.json的dev dependencies字段，不多说看图——>
+
+
+![image.png](http://upload-images.jianshu.io/upload_images/7930564-23c12fe9a1daa1c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+而如果写的是--save没有dev的话，那么就会被写到dependencies字段。
+那么他们俩的差别是什么呢？
+很简单，有dev(develop)的放开发时的辅助工具，不会被打包进业务代码，比如测试工具，打包工具等等。而没有dev的dependencies的字段里放的是业务代码的依赖包，比如我们的项目依赖jQuery，就可以吧jQuery放进去。
+接下来，就是我掉的很深的一个坑了（谁让你蠢且瞎）
+**第四个坑点**
+
+*储备知识*
+webpack.config-js，webpack对各种类型的文件的处理方式都是在这个文件里配置的，而webpack的配置文件默认指向的是**根目录(请记住这个词)**下的webpack.config.js。这个文件实际上就是一个commonJS的一个模块，这个文件的输出最终就是一个JSON形式的配置文件。
+webapck.config.js里的内容可以在官网文档里查看，基本就是
+* entry(js的入口文件) 
+* externals(外部依赖的声明) 
+* output(目标文件)
+* resolve(配置别名)
+* module(各种loader)
+* plugins(各种插件)
+
+执行webpack指令的时候，要注意将配置文件放在根目录下，我的项目文件是这样的
+
+![image.png](http://upload-images.jianshu.io/upload_images/7930564-3cbc6764df44c1e2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+第一步，看官方文档
+
+![image.png](http://upload-images.jianshu.io/upload_images/7930564-7f4bd56adf28a5c4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+第二步，创建cats.js和app.js，cats.js是被输出的文件，而app.js是入口文件，按照文档上继续操作
+
+
+![image.png](http://upload-images.jianshu.io/upload_images/7930564-6a9b1da6139190a5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
