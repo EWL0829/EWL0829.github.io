@@ -1,0 +1,60 @@
+---
+layout:     post
+title:      正式开始开发的第一天
+subtitle:   开发阶段
+date:       2017-11-06
+author:     EWL
+header-img: img/home-bg-art.jpg
+catalog: true
+tags:
+    - 前端
+    - happymmall
+    - JavaScript
+    - CSS
+    - html
+---
+
+按照老师说的，先初始化整个项目，初始化包括**项目目录**以及**项目工具**。好在我之前有自己学一点Git，所以相对要容易一点。唯一的差别就是把自己的github密钥（莫一密，一曰月，mi yue，对就是这么念的）搞到码云上去，因为最开始用的是github所以本地已经有了自己的公钥和密钥，我的是存储在C盘用户中的，文件夹长这样
+
+![image.png](http://upload-images.jianshu.io/upload_images/7930564-86f5afb5fcad8d02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+点开.ssh文件夹后，长这样
+![image.png](http://upload-images.jianshu.io/upload_images/7930564-f6db29f722781f81.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+同时在git bash中输入
+```
+cat ~/.ssh/id_rsa
+```
+可以看见自己的密钥，不过这是私钥，公钥的话后边还要加上.pub
+
+
+![image.png](http://upload-images.jianshu.io/upload_images/7930564-58023595ced45d94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+
+然后依样画葫芦把它复制到码云的仓库中，搞定收工。
+
+接下来就是一系列的关于Git的操作
+主要是两部分需要额外注意：<1>vim的使用<2>git基础的一些命令和切换分支，以及在正式开发时主分支master是只读的，开发都是在其他分支上进行的
+
+1. 对于配置Git来说，第一件事我选择全面实现懒人模式（搞定缩写别名）
+```
+vim .gitconfig
+```
+这句指令会打开gitconfig文件，然后把我需要的那些指令的缩写全写进去
+```
+[alias]
+      ca = commit -am
+      ci = commit 
+      dt = difftool
+      st = status
+      pl = pull
+      ps = push
+      b = branch
+      co = checkout
+```  
+写完之后，要退出来的时候，，，我输进去了:wq，然后，，，没反应
+
+![image.png](http://upload-images.jianshu.io/upload_images/7930564-6cadbc981a049c79.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+各种网站，各种教程翻遍了，结果发现我忘记了先按一下ESC。（这一定是时辰的错！！！）
+
+2. 配置完成之后开始各种切换分支创建文件夹，创建文件，删除文件，以及push文件，pull文件，还有克隆仓库等等。
+* cd 到处跳定位
+* cat 读取文件里的内容，一旦输入一个文件夹给cat读取，就会返回xxx Is a directory(踩了很多次坑)
