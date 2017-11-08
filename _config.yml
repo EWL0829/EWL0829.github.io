@@ -1,9 +1,9 @@
 # Site settings
 title: EWL Blog
-SEOTitle: EWL的博客 | EWL Blog
+SEOTitle: 你以为看的是谁的博客？是EWL的
 header-img: img/post-bg-desk.jpg
 email: amoryvictorialee@outlook.com
-description: "说什么好呢>_<"
+description: "没啥好说的诶，那祝各位春节快乐吧"
 keyword: "前端开发, lee, EWL Blog, 生活, 记录"
 url: "http://ewl0829.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
