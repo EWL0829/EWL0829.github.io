@@ -76,16 +76,16 @@ service-worker: true
 # Friends
 friends: [
     {
-        title: "",
-        href: ""
+        title: "慕课·EWL",
+        href: "http://www.imooc.com/u/5241087"
     },{
-        title: "简书·BY",
+        title: "简书·EWL",
         href: "http://www.jianshu.com/u/0ed85cba62c4"
     },{
-        title: "",
-        href: ""
+        title: "微博·EWL",
+        href: "https://weibo.com/2862755300/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1"
     },{
-        title: "",
-        href: ""
+        title: "B站·EWL",
+        href: "https://space.bilibili.com/11929961/#!/"
     }
 ]
