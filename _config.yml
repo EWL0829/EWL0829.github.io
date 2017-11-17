@@ -1,9 +1,9 @@
 # Site settings
 title: EWL Blog
-SEOTitle: 你以为看的是谁的博客？是EWL的
+SEOTitle:  干花与枯骨，EWL
 header-img: img/post-bg-desk.jpg
 email: amoryvictorialee@outlook.com
-description: "没啥好说的诶，那祝各位春节快乐吧"
+description: "enough with lies"
 keyword: "前端开发, lee, EWL Blog, 生活, 记录"
 url: "http://ewl0829.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
@@ -11,7 +11,7 @@ github_repo: "https://github.com/EWL0829/EWL0829.github.io.git" # you code repos
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "说什么好呢>_<"
+sidebar-about-description: "如果可以的话，请认真生活出一个更好的自己"
 sidebar-avatar: /img/about-BY-gentle.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
