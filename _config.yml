@@ -56,8 +56,9 @@ kramdown:
 
 # 评论系统
 # Disqus settings（https://disqus.com/）
-disqus_username: EWL0829
-
+# disqus_username: EWL0829
+disqus:
+  shortname: EWL0829
 
 
 
