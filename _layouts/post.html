@@ -109,7 +109,10 @@ layout: default
                     {% endif %}
                 </ul>
 
-
+		
+		    
+		    
+		    
                 {% if site.duoshuo_username %}
                 <!-- 多说评论框 start -->
                 <div class="comment">
@@ -129,6 +132,24 @@ layout: default
                 </div>
                 <!-- disqus 评论框 end -->
                 {% endif %}
+		
+		    
+		<!-- 	gitment评论框	-->
+		    	<div id="gitmentContainer"></div>
+			<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+			<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+			<script>
+				var gitment = new Gitment({
+				    owner: 'EWL0829',
+				    repo: 'http://EWL0829/EWL0829.github.io',
+				    oauth: {
+					client_id: '92205fd5fa37afea798a',
+					client_secret: '2fd50b1e6a9f90c673ffd164d5d7328008cd771e',
+				    },
+				});
+				gitment.render('gitmentContainer');
+			</script>
+
 
             </div>  
 
