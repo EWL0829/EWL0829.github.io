@@ -2,7 +2,7 @@
 layout:     post
 title:      apply以及call实现bind的过程
 subtitle:   okcoin-web
-date:       2017-11-06
+date:       2018-07-07
 author:     EWL
 header-img: img/home-bg-art.jpg
 catalog: true
