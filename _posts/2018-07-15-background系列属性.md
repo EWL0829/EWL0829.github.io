@@ -2,7 +2,7 @@
 layout:     post
 title:      background系列属性
 subtitle:   css
-date:       2018-07-10
+date:       2018-07-15
 author:     EWL
 header-img: img/home-bg-art.jpg
 catalog: true
