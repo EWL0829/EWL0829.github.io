@@ -1,0 +1,116 @@
+---
+layout:     post
+title:      Object.assign的模拟实现
+subtitle:   模拟assign
+date:       2018-07-16
+author:     EWL
+header-img: img/home-bg-art.jpg
+catalog: true
+tags:
+    - 前端    
+    - javascript
+---
+
+
+#### assign的特点研究
+
+1. 不能复制null以及undefined，甚至不能不给assign传参。
+2. Object.assign返回的都是对象，即使传入的是number/string/boolean这一类基本类型，返回的也是Number/String/Boolean等对象类型。
+3. assign方法在面临复制源对象中有属性值为对象引用的情况，那么返回的也只是对象的引用而已，修改复制源对象的属性值，也会影响assign方法返回的对象。
+4. 用于复制拷贝单个对象时，assign返回的对象和源对象占据着相同的内存空间，即是同一个对象引用。
+
+#### 代码以及效果
+
+```
+/**
+ * Created by liyue.
+ * Email: li.yue@okcoin.com
+ * Date: 2018/7/14
+ * Time: 下午3:38
+ */
+
+'use strict';
+
+
+
+//最终版本的assign模拟
+function assignImitate() {
+    let len = arguments.length,
+        target = arguments[0];
+    if(len == 0 || target == null || target == undefined) {
+        throw new Error('Cannot convert undefined or null to object');
+    }else if(len == 1){
+        if(target instanceof Object) {
+            return target;
+        }else {
+            let newObj =target;
+            if(typeof target === 'string'){
+                return new String(newObj);
+            }else if(typeof target === 'boolean'){
+                return new Boolean(newObj);
+            }else if(typeof target === 'number'){
+                return new Number(newObj);
+            }
+        }
+    }else {
+        for(let i = 1; i < len; i++) {
+            for(let k in target) {
+                if(arguments[i].hasOwnProperty(k)){
+                    target[k] = arguments[i][k];
+                }
+            }
+        }
+        return target;
+    }
+}
+
+
+let obj1 = {
+    a: 1,
+    b: 2,
+    c: {
+        name: '111',
+        age: 22,
+    },
+};
+
+let obj2 = {
+    b: 3,
+    c: 4,
+};
+
+let str = 'string';
+
+//融合obj1与obj2
+let result = assignImitate(obj1,obj2);
+let result01 = Object.assign(obj1,obj2);
+console.log(obj1 === result);
+console.log(obj1 === result01);
+console.log('assignImitate模仿结果',result);
+console.log('assign结果',result01);
+//复制基本类型
+let result02 = assignImitate(str);
+let result03 = Object.assign(str);
+console.log(str === result02);
+console.log(str === result03);
+console.log('assignImitate模仿结果',result02);
+console.log('assign结果',result03);
+//复制引用类型
+let result04 = assignImitate(obj1);
+let result05 = Object.assign(obj1);
+console.log(obj1 === result04);
+console.log(obj1 === result05);
+console.log('assignImitate模仿结果',result04);
+console.log('assign结果',result05);
+```
+
+**效果图**
+![image.png](https://upload-images.jianshu.io/upload_images/7930564-a097ca7da00165d9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+#### 补充
+
+当前版本考虑的还不是很成熟，尤其是对于函数类型的复制，还需要进一步的完善。
+
+#### 参考资料
+[Objects in javascript : object.assign/deep copy](https://medium.com/@tkssharma/objects-in-javascript-object-assign-deep-copy-64106c9aefab)
+[mdn上assign的概念解析](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
