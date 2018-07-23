@@ -1,0 +1,62 @@
+---
+layout:     post
+title:      setState方法的学习（来自文档的翻译）
+subtitle:   setState方法的学习（来自文档的翻译）
+date:       2018-07-22
+author:     EWL
+header-img: img/home-bg-art.jpg
+catalog: true
+tags:
+    - 前端    
+    - javascript
+    - React
+---
+
+React文档对于setState的解释和应用
+setState()会对组件状态的改变进行排列然后噶欧式React该组件和它的子组件需要基于更新过后的状态进行重新渲染。这是在响应事件处理和服务器响应后对用户界面进行更新的基本方法。
+
+要将setState()方法当成是一次请求而非一个更新组件的即时指令。为了更好的性能体验，React会将其延迟，然后一次性更新多个组件。React并不能够保证状态改变能够即刻生效。
+
+setState()并不总是能够即刻更新组件。它可能会批量更新或者推迟更新。这使得在调用setState方法之后立刻读取this.state成为了一个潜在的陷阱。相反的，使用componentDidUpdate或者setState的回调函数其中任何一个，都可以保证在更新应用之后触发。如果你需要基于上一个状态去设置新状态，可以阅读下面提到的updater论点。
+
+除非shouldComponentUpdate返回false，否则setState总是会导致一次新的渲染。
+如果正在使用可变对象且无法在shouldComponentUpdate（）中实现条件渲染逻辑，则仅在新状态与上一状态不同时调用setState（），这可以避免不必要的二次渲染。
+
+第一个参数是带签名的updater函数：
+```
+(prevState, props) => stateChange
+```
+prevState是对上一状态的引用。它不能被直接修改。相反的，修改应该以一个基于prevState和props输入的新对象来呈现。例如，假设我们想要通过props.step来增加状态值：
+```
+this.setState((prevState, props) => {
+    return {counter: prevState.counter + props.step};
+});
+```
+
+被updater函数接收的两个值，prevState和props都能保证是最新值。updater函数的输出是与prevState浅合并的。
+
+setState的第二个参数是一个可选的回调函数，一旦setState被完成该回调函数就会被执行，组件就会进行重新渲染。一般来说我们推荐使用componentDidUpdate来代替这样的逻辑判断。
+
+你可以选择性传递一个对象作为第一个参数给setState而非是一个函数。
+```
+setState(stateChange[,callback])
+```
+这会将stateChange浅层合并到新状态，例如，调整购物车项目数量：
+```
+this.setState({quantity: 2})
+```
+这种形式的setState也是异步的，并且在同一个生命周期中多次调用会被一次性批量处理。举例，如果你想要在同一生命周期中多次添加一件物品，那么这就会产生相当于：
+```
+Object.assign(
+  previousState,
+  {quantity: state.quantity + 1},
+  {quantity: state.quantity + 1},
+  ...
+)
+```
+后续调用会覆盖掉同一周期中上一次的调用。所以，数量只能够被增加一次。如果下一状态是取决于上一状态的，那么我们推荐使用updater函数形式来代替：
+```
+this.setState((prevState) => {
+  return {quantity: prevState.quantity + 1};
+});
+```
