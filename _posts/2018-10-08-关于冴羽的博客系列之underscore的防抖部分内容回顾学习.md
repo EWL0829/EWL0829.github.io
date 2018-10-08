@@ -2,7 +2,7 @@
 layout:     post
 title:      关于冴羽的博客系列之underscore的防抖部分内容回顾学习
 subtitle:   underscore的防抖
-date:       2017-11-06
+date:       2018-10-08
 author:     EWL
 header-img: img/home-bg-art.jpg
 catalog: true
