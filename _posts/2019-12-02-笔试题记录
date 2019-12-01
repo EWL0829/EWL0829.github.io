@@ -1,0 +1,16 @@
+---
+layout:     post
+title:      2019-12-02-笔试题记录
+subtitle:   笔试题
+date:       2019-12-02
+author:     EWL
+header-img: img/bg-light.jpg
+catalog: true
+tags:
+    - 前端
+    - JavaScript
+    - 基础
+---
+
+1. ```border: none```与```border: 0```的差别
+答：border: 0会被渲染为border: 0 initial initial而border: none会被渲染成border: initial none initial
